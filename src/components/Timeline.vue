@@ -14,20 +14,24 @@
           index === 0 ? 'mt-0' : '-mt-24'
         ]"
       >
-
-        <div class="w-72 md:w-96 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md p-4 animate-fadeInUp border border-rose-300">
+        <div
+          class="w-72 md:w-96 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md p-4 animate-fadeInUp border border-rose-300"
+        >
           <p class="text-sm text-rose-500 font-medium mb-3">{{ item.date }}</p>
 
-          <img
-            v-if="item.type === 'photo'"
-            :src="item.src"
-            class="rounded-xl w-full max-h-96 object-contain"
-          />
+          <!-- Фото -->
+          <div v-if="item.type === 'photo'" class="rounded-2xl overflow-hidden">
+            <img
+              :src="item.src"
+              class="w-full max-h-96 object-contain bg-white cursor-zoom-in"
+              @click="openImage(item.src)"
+            />
+          </div>
 
           <video
             v-else
             controls
-            class="rounded-xl w-full max-h-96 object-contain"
+            class="rounded-2xl w-full max-h-96 object-contain"
           >
             <source :src="item.src" type="video/mp4" />
           </video>
@@ -41,14 +45,34 @@
     >
       Назад в меню
     </RouterLink>
+
+    <!-- Модалка полноэкранного просмотра -->
+    <div
+      v-if="selectedImage"
+      class="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+      @click="closeImage"
+    >
+      <img
+        :src="selectedImage"
+        class="max-w-full max-h-full object-contain rounded-lg"
+      />
+    </div>
   </div>
 </template>
 
-
-//TODO: исправить timelineData
-
-
 <script setup>
+import { ref } from "vue";
+
+const selectedImage = ref(null);
+
+function openImage(src) {
+  selectedImage.value = src;
+}
+
+function closeImage() {
+  selectedImage.value = null;
+}
+
 const timelineData = [
   { date: "13 февраля 2021", src: "photos/13.02.2021.jpg", type: "photo" },
   { date: "16 декабря 2023", src: "photos/16.12.2023 (2).jpg", type: "photo" },
@@ -57,57 +81,59 @@ const timelineData = [
   { date: "30 января 2024", src: "videos/30.01.2024.mp4", type: "video" },
   { date: "11 марта 2024", src: "photos/11.03.2024.jpg", type: "photo" },
   { date: "26 марта 2024", src: "photos/26.03.2024.jpg", type: "photo" },
-  { date: "28 марта 2024", src: "photos/28.03.2024 (2).jpg", type: "photo" },
   { date: "28 марта 2024", src: "photos/28.03.2024.jpg", type: "photo" },
+  { date: "28 марта 2024", src: "photos/28.03.2024 (2).jpg", type: "photo" },
   { date: "13 апреля 2024", src: "photos/13.04.2024.jpg", type: "photo" },
   { date: "28 апреля 2024", src: "videos/28.04.2024.mp4", type: "video" },
   { date: "22 июня 2024", src: "photos/22.06.2024.jpg", type: "photo" },
-  { date: "27 апреля 2024", src: "photos/27.04.2024.jpg", type: "photo" },
-  { date: "30 апреля 2024", src: "photos/30.04.2024.jpg", type: "photo" },
-  { date: "7 мая 2024", src: "photos/07.05.2024.jpg", type: "photo" },
-  { date: "17 мая 2024", src: "photos/17.05.2024.jpg", type: "photo" },
-  { date: "19 мая 2024", src: "photos/19.05.2024.jpg", type: "photo" },
-  { date: "20 мая 2024", src: "photos/20.05.2024.jpg", type: "photo" },
-  { date: "28 мая 2024", src: "photos/28.05.2024.jpg", type: "photo" },
-  { date: "1 июня 2024", src: "videos/01.06.2024.mp4", type: "video" },
-  { date: "2 июня 2024", src: "photos/02.06.2024 (2).jpg", type: "photo" },
-  { date: "2 июня 2024", src: "photos/02.06.2024.jpg", type: "photo" },
-  { date: "3 июня 2024", src: "photos/03.06.2024 (2).jpg", type: "photo" },
-  { date: "3 июня 2024", src: "photos/03.06.2024.jpg", type: "photo" },
-  { date: "7 июня 2024", src: "videos/07.06.2024.mp4", type: "video" },
-  { date: "8 июня 2024", src: "photos/08.06.2024 (2).jpg", type: "photo" },
-  { date: "8 июня 2024", src: "photos/08.06.2024.jpg", type: "photo" },
-  { date: "9 июня 2024", src: "videos/09.06.2024.mp4", type: "video" },
-  { date: "12 июня 2024", src: "photos/12.06.2024 (2).jpg", type: "photo" },
-  { date: "12 июня 2024", src: "photos/12.06.2024.jpg", type: "photo" },
-  { date: "13 июня 2024", src: "photos/13.06.2024.jpg", type: "photo" },
-  { date: "16 июня 2024", src: "photos/16.06.2024 (2).jpg", type: "photo" },
-  { date: "16 июня 2024", src: "photos/16.06.2024.jpg", type: "photo" },
-  { date: "22 июня 2024", src: "videos/22.06.2024.mp4", type: "video" },
-  { date: "24 июня 2024", src: "photos/24.06.2024.jpg", type: "photo" },
-  { date: "30 июня 2024", src: "photos/30.06.2024.jpg", type: "photo" },
-  { date: "1 июля 2024", src: "photos/01.07.2024.jpg", type: "photo" },
-  { date: "4 июля 2024", src: "photos/04.07.2024.jpg", type: "photo" },
-  { date: "6 июля 2024", src: "videos/06.07.2024.mp4", type: "video" },
-  { date: "7 июля 2024", src: "photos/07.07.2024.jpg", type: "photo" },
-  { date: "10 июля 2024", src: "photos/10.07.2024.jpg", type: "photo" },
-  { date: "11 июля 2024", src: "photos/11.07.2024.jpg", type: "photo" },
-  { date: "14 июля 2024", src: "photos/14.07.2024.jpg", type: "photo" },
-  { date: "17 июля 2024", src: "photos/17.07.2024.jpg", type: "photo" },
-  { date: "20 июля 2024", src: "photos/20.07.2024.jpg", type: "photo" },
+  { date: "29 июня 2024", src: "photos/29.06.2024.jpg", type: "photo" },
+  { date: "7 июля 2024", src: "videos/07.07.2024.mp4", type: "video" },
+  { date: "7 июля 2024", src: "videos/07.07.2024 (2).mp4", type: "video" },
   { date: "21 июля 2024", src: "videos/21.07.2024.mp4", type: "video" },
-  { date: "5 августа 2024", src: "photos/05.08.2024.jpg", type: "photo" },
-  { date: "7 августа 2024", src: "photos/07.08.2024.jpg", type: "photo" },
-  { date: "16 августа 2024", src: "photos/16.08.2024.jpg", type: "photo" },
-  { date: "18 августа 2024", src: "photos/18.08.2024.jpg", type: "photo" },
-  { date: "19 августа 2024", src: "videos/19.08.2024.mp4", type: "video" },
-  { date: "24 августа 2024", src: "photos/24.08.2024.jpg", type: "photo" },
-  { date: "1 сентября 2024", src: "videos/01.09.2024.mp4", type: "video" },
-  { date: "22 сентября 2024", src: "photos/22.09.2024.jpg", type: "photo" },
+  { date: "27 июля 2024", src: "photos/27.07.2024.jpg", type: "photo" },
+  { date: "3 августа 2024", src: "videos/03.08.2024.mp4", type: "video" },
+  { date: "17 августа 2024", src: "photos/17.08.2024.jpg", type: "photo" },
+  { date: "26 сентября 2024", src: "videos/26.09.2024.mp4", type: "video" },
   { date: "26 сентября 2024", src: "videos/26.09.2024 (2).mp4", type: "video" },
-  { date: "26 сентября 2024", src: "videos/26.09.2024.mp4", type: "video" }
+  { date: "3 октября 2024", src: "photos/03.10.2024.jpg", type: "photo" },
+  { date: "3 октября 2024", src: "photos/03.10.2024 (2).jpg", type: "photo" },
+  { date: "12 октября 2024", src: "photos/12.10.2024.jpg", type: "photo" },
+  { date: "2 декабря 2024", src: "photos/02.12.2024.jpg", type: "photo" },
+  { date: "9 декабря 2024", src: "photos/09.12.2024.jpg", type: "photo" },
+  { date: "2 января 2025", src: "photos/02.01.2025.jpg", type: "photo" },
+  { date: "11 января 2025", src: "photos/11.01.2025.jpg", type: "photo" },
+  { date: "19 января 2025", src: "videos/19.01.2025.mp4", type: "video" },
+  { date: "24 января 2025", src: "videos/24.01.2025.mp4", type: "video" },
+  { date: "25 января 2025", src: "videos/25.01.2025.mp4", type: "video" },
+  { date: "28 января 2025", src: "photos/28.01.2025.jpg", type: "photo" },
+  { date: "1 февраля 2025", src: "videos/01.02.2025.mp4", type: "video" },
+  { date: "3 февраля 2025", src: "photos/03.02.2025.jpg", type: "photo" },
+  { date: "3 февраля 2025", src: "videos/03.02.2025.mp4", type: "video" },
+  { date: "7 февраля 2025", src: "photos/07.02.2025.jpg", type: "photo" },
+  { date: "23 февраля 2025", src: "photos/23.02.2025.jpg", type: "photo" },
+  { date: "24 февраля 2025", src: "photos/24.02.2025.jpg", type: "photo" },
+  { date: "28 февраля 2025", src: "videos/28.02.2025.mp4", type: "video" },
+  { date: "28 февраля 2025", src: "videos/28.02.2025 (2).mp4", type: "video" },
+  { date: "9 марта 2025", src: "videos/09.03.2025.mp4", type: "video" },
+  { date: "26 апреля 2025", src: "photos/26.04.2025.jpg", type: "photo" },
+  { date: "19 июня 2025", src: "videos/19.06.2025.mp4", type: "video" },
+  { date: "20 июня 2025", src: "photos/20.06.2025.jpg", type: "photo" },
+  { date: "22 июня 2025", src: "photos/22.06.2025.jpg", type: "photo" },
+  { date: "22 июня 2025", src: "photos/22.06.2025 (2).jpg", type: "photo" },
+  { date: "22 июня 2025", src: "photos/22.06.2025 (3).jpg", type: "photo" },
+  { date: "22 июня 2025", src: "photos/22.06.2025 (4).jpg", type: "photo" },
+  { date: "22 июня 2025", src: "photos/22.06.2025 (5).jpg", type: "photo" },
+  { date: "24 июня 2025 (я сделал фото в эту дату)", src: "photos/24.06.2025.jpg", type: "photo" },
+  { date: "29 июня 2025", src: "videos/29.06.2025.mp4", type: "video" },
+  { date: "29 июня 2025", src: "videos/29.06.2025 (2).mp4", type: "video" },
+  { date: "30 июня 2025", src: "videos/30.06.2025.mp4", type: "video" },
+  { date: "5 сентября 2025", src: "photos/05.09.2025.jpg", type: "photo" },
+  { date: "9 сентября 2025", src: "videos/09.09.2025.mp4", type: "video" },
+  { date: "14 октября 2025", src: "photos/14.10.2025.jpg", type: "photo" },
+  { date: "19 октября 2025", src: "photos/19.10.2025.jpg", type: "photo" },
+  { date: "19 октября 2025", src: "videos/19.10.2025.mp4", type: "video" },
+  { date: "31 октября 2025", src: "photos/31.10.2025.jpg", type: "photo" }
 ];
-
 </script>
 
 <style scoped>
@@ -120,7 +146,10 @@ const timelineData = [
   animation: fadeInUp 1s ease forwards;
 }
 
-/* Линия по центру (опция) */
+.cursor-zoom-in {
+  cursor: zoom-in;
+}
+
 .timeline::before {
   content: '';
   position: absolute;
