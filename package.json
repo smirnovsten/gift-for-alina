@@ -10,6 +10,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "gsap": "^3.13.0",
     "lottie-web": "^5.13.0",
     "prettier": "^3.6.2",
