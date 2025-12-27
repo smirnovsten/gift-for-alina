@@ -4,5 +4,10 @@ import App from './App.vue'
 import router from './router'
 import AOS from 'aos'
 
-AOS.init()
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
+
+AOS.init({
+  once: true,
+})
