@@ -85,6 +85,8 @@ const timelineData = [
   { date: "28 марта 2024", src: "photos/28.03.2024 (2).jpg", type: "photo" },
   { date: "13 апреля 2024", src: "photos/13.04.2024.jpg", type: "photo" },
   { date: "28 апреля 2024", src: "videos/28.04.2024.mp4", type: "video" },
+  { date: "12 мая 2024", src: "videos/12.05.2024.mp4", type: "video" },
+  { date: "28 мая 2024", src: "videos/28.05.2024.mp4", type: "video" },
   { date: "22 июня 2024", src: "photos/22.06.2024.jpg", type: "photo" },
   { date: "29 июня 2024", src: "photos/29.06.2024.jpg", type: "photo" },
   { date: "7 июля 2024", src: "videos/07.07.2024.mp4", type: "video" },
@@ -115,6 +117,8 @@ const timelineData = [
   { date: "28 февраля 2025", src: "videos/28.02.2025.mp4", type: "video" },
   { date: "28 февраля 2025", src: "videos/28.02.2025 (2).mp4", type: "video" },
   { date: "9 марта 2025", src: "videos/09.03.2025.mp4", type: "video" },
+  { date: "9 марта 2025", src: "videos/9.03.2025.mp4", type: "video" },
+  { date: "24 апреля 2025", src: "videos/24.04.2025.mp4", type: "video" },
   { date: "26 апреля 2025", src: "photos/26.04.2025.jpg", type: "photo" },
   { date: "19 июня 2025", src: "videos/19.06.2025.mp4", type: "video" },
   { date: "20 июня 2025", src: "photos/20.06.2025.jpg", type: "photo" },
@@ -126,13 +130,18 @@ const timelineData = [
   { date: "24 июня 2025 (я сделал фото в эту дату)", src: "photos/24.06.2025.jpg", type: "photo" },
   { date: "29 июня 2025", src: "videos/29.06.2025.mp4", type: "video" },
   { date: "29 июня 2025", src: "videos/29.06.2025 (2).mp4", type: "video" },
+  { date: "30 июня 2025", src: "videos/30.06.2025 (2).mp4", type: "video" },
   { date: "30 июня 2025", src: "videos/30.06.2025.mp4", type: "video" },
   { date: "5 сентября 2025", src: "photos/05.09.2025.jpg", type: "photo" },
   { date: "9 сентября 2025", src: "videos/09.09.2025.mp4", type: "video" },
   { date: "14 октября 2025", src: "photos/14.10.2025.jpg", type: "photo" },
+  { date: "18 октября 2025", src: "videos/18.10.2025.mp4", type: "video" },
   { date: "19 октября 2025", src: "photos/19.10.2025.jpg", type: "photo" },
-  { date: "19 октября 2025", src: "videos/19.10.2025.mp4", type: "video" },
-  { date: "31 октября 2025", src: "photos/31.10.2025.jpg", type: "photo" }
+  { date: "31 октября 2025", src: "photos/31.10.2025.jpg", type: "photo" },
+  { date: "2 ноября 2025", src: "videos/2.11.2025.mp4", type: "video" },
+  { date: "10 декабря 2025", src: "videos/10.12.2025.mp4", type: "video" },
+  { date: "12 декабря 2025", src: "photos/12.12.2025.jpg", type: "photo" },
+  { date: "13 декабря 2025", src: "photos/13.12.2025.jpg", type: "photo" }
 ];
 </script>
 
