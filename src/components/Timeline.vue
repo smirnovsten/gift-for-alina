@@ -32,6 +32,9 @@
             v-else
             controls
             class="rounded-2xl w-full max-h-96 object-contain"
+            @play="bgMusic.pause()"
+            @pause="bgMusic.play()"
+            @ended="bgMusic.play()"
           >
             <source :src="item.src" type="video/mp4" />
           </video>
@@ -61,17 +64,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { getBgMusic } from '../audio/bgMusic'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const bgMusic = getBgMusic()
 
 const selectedImage = ref(null);
 
 function openImage(src) {
-  selectedImage.value = src;
+  selectedImage.value = src
+  bgMusic.play()
 }
 
 function closeImage() {
-  selectedImage.value = null;
+  selectedImage.value = null
+  bgMusic.play()
 }
+
+onMounted(() => {
+  bgMusic.pause()
+})
+
+onUnmounted(() => {
+  bgMusic.play()
+})
 
 const timelineData = [
   { date: "13 февраля 2021", src: "photos/13.02.2021.jpg", type: "photo" },
